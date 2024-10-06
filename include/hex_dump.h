@@ -15,13 +15,31 @@ typedef enum {
     STATUS_PERMISSION_DENIED = 6
 } Status;
 
+typedef enum {
+    FORMAT_HEX,
+    FORMAT_BINARY,
+    FORMAT_OCTAL,
+    FORMAT_DECIMAL
+} OutputFormat;
+
 const char*
 status_to_string(Status status);
 
 Status
-print_hex(unsigned char* buffer, int length, int offset);
+print_hex(const unsigned char* const buffer, int length, int offset, OutputFormat format);
 
 Status
-hex_dump_file(const char* filename);
+hex_dump_file(
+    const char* filename,
+    OutputFormat format,
+    int line_width,
+    const char* output_file,
+    int detailed,
+    int max_size,
+    int filter_printable
+);
+
+void
+print_help();
 
 #endif // HEX_DUMP_HEX_DUMP_H
